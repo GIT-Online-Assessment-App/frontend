@@ -1,0 +1,159 @@
+
+<nav class="navbar fixed-top navbar-light" style="background-color:#7e8082;">
+    <span class="navbar-brand">{{hm.uname}}</span>
+    
+    <div class="white-fonts">
+        <a class="context-menu nav-links" href="#!home">Home</a>  |
+        <a class="pointer nav-links" href="#!dashboard">History</a>       
+        
+    </div>
+    
+    <button class="btn btn-outline-dark" type="button" ng-click="hm.logout()">Logout</button>
+</nav>
+<div class="container-dashboard100 m-t-10">
+    <div class="wrap-dashboard100 p-l-55 p-r-55 p-t-65 p-b-50 m-b-10"  >
+            <form name="form" ng-submit= "form.$valid && hm.create()" novalidate>
+                <fieldset ng-disabled = "hm.success">
+                    <div class="row">
+                        <div class="col" ng-class="{ 'has-error': form.$submitted && form.item_type.$invalid }">
+                            <select name="item_type" class="form-control m-t-15 custom-select" ng-model="hm.item_type" required> 
+                                    <option value="">Event Type</option> 
+                                    <option ng-repeat="event in hm.events"  value="{{event}}"  >{{event}}</option> 
+                            </select>
+                            <span ng-messages="form.$submitted && form.item_type.$error"  class="focus-input100-1">
+                                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter event type!</b></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row m-t-10">
+                            <div class="col-sm-4" ng-class="{ 'has-error': form.$submitted && form.semester.$invalid }">
+                                    <select name="semester" class="form-control m-t-15 custom-select" ng-model="hm.semester" required> 
+                                            <option value="">Semester</option> 
+                                            <option ng-repeat="i in hm.sems"  value="{{i}}"  >{{i}}</option> 
+                                    </select>
+                                    <span ng-messages="form.$submitted && form.semester.$error"  class="focus-input100-1">
+                                        <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter semester!</b></span>
+                                    </span>
+                            </div>
+                            <div class="col-sm-4" ng-class="{ 'has-error': form.$submitted && form.ia_no.$invalid }">
+                                <div  ng-show="hm.item_type == 'QUIZ'">
+                                    <select name="ia_no" class="form-control m-t-15 custom-select" ng-model="hm.ia_no" required> 
+                                            <option value="">Test Series</option> 
+                                            <option ng-repeat="item in hm.assessments | orderBy"  value="{{item}}"  >{{item}}</option> 
+                                    </select>
+                                <span ng-messages="form.$submitted && form.ia_no.$error"  class="focus-input100-1">
+                                        <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter Test Series.!</b></span>
+                                </span>
+                                </div>
+                            </div> 
+                            <div class="col-sm-4" ng-class="{ 'has-error': form.$submitted && form.subject.$invalid }" >
+                                    <input type="text" name="subject" class="form-control m-t-15" ng-model="hm.subject" placeholder="enter Topic" required>
+                                    <span ng-messages="form.$submitted && form.subject.$error"  class="focus-input100-1">
+                                        <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Topic!</b></span>
+                                    </span>
+                                    
+                            </div>
+
+                                                            
+                        </div>
+                        <div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
+                            <div class="col"></div>
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary btn-sm b-w-100p">Submit</button>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                </fieldset>
+            </form>
+    </div>
+
+
+    <div class="wrap-questions100 p-l-55 p-r-55 p-t-20 p-b-50 readonly" ng-show="hm.success">
+                
+        <div>
+                <form name="form1" class="login100-form validate-form" ng-submit= "form1.$valid && hm.submit()" novalidate>
+                <span class="question100-form-title m-t-10 m-b-20"> Create Exam</span>
+                <span class="m-t-10" style="font-size : x-small;">{{hm.test_code}}</span>
+                    <fieldset class="question m-t-10"  ng-repeat="column in hm.questions">
+                
+                <textarea type="text" class="question100" name="question" rows="8" cols="40" ng-model="column.question" placeholder="Please enter the question" required></textarea>
+                <button class="remove close"  ng-click="hm.removeColumn($index)">&times;</button><br>
+                    
+                    
+                
+                    <input type="text" class="options100 form-control m-t-10" ng-model="column.options[0]"  placeholder="Option 1" required>
+                    <input type="text" class="options100 form-control m-t-10" ng-model="column.options[1]"  placeholder="Option 2" required>
+                    <input type="text" class="options100 form-control m-t-10" ng-model="column.options[2]"  placeholder="Option 3">
+                    <input type="text" class="options100 form-control m-t-10" ng-model="column.options[3]"  placeholder="Option 4">
+                    
+                    <select name="answer" class="form-control m-t-15 answer100" ng-model="column.answer" required> 
+                            <option value="">Correct Answer</option> 
+                            <option ng-repeat="option in column.options"  value="{{option}}"  >{{option}}</option> 
+                    </select> 
+
+                        
+                    </fieldset>
+                    <button class="addfields btn btn-outline-secondary" ng-click="hm.addNewColumn()">Add Question</button>
+                    
+                    <div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
+                        <div class="col-sm-2" ng-class="{ 'has-error': form1.$submitted && form1.positive_marks.$invalid }">
+                            <small><label for="positive_marks"><b>Positive Marks:</b></label></small>
+                            <input type="number" name="positive_marks" min="1" class="options100 form-control" ng-model="hm.positive_marks"  placeholder="Positive Marks" required>
+                            <span ng-messages="form1.$submitted && form1.positive_marks.$error"  class="focus-input100-1">
+                                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Positive Marks for each question!</b></span>
+                            </span>
+                            <span ng-messages="form1.positive_marks.$error" style="color:red; font-size : x-small;">
+                                    <b><span ng-message="number">You did not enter a valid number</span>
+                                    <span ng-message="min">+ive Marks should be > 1!</span>
+                                    <span ng-message="max" translate="FORM.MAXVALUE"></span></b>
+                            </span>
+                        </div>
+
+
+                        <div class="col-sm-2" ng-class="{ 'has-error': form1.$submitted && form1.negative_marks.$invalid }">
+                            <small><label for="negative_marks"><b>Negative Marks:</b></label></small>
+                            <input type="number" name="negative_marks" max="0" class="options100 form-control" ng-model="hm.negative_marks"  placeholder="Negative marks" required>
+                            <span ng-messages="form1.$submitted && form1.negative_marks.$error"  class="focus-input100-1">
+                                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter Negative marks for each WRONG answer!</b></span>
+                            </span>
+                            <span ng-messages="form1.negative_marks.$error" style="color:red; font-size : x-small;">
+                                    <b> <span ng-message="number">You did not enter a valid number</span>
+                                    <span ng-message="min"></span>
+                                    <span ng-message="max">-ive Marks should be <= 0!</span>
+                                </b>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
+                        <div class="col-sm-6 m-t-15" ng-class="{ 'has-error': form1.$submitted && form1.skey.$invalid }">
+                            <input type="text" name="skey" class="options100 form-control" ng-model="hm.securitykey"  placeholder="Enter exam key" required>
+                            <span ng-messages="form1.$submitted && form1.skey.$error"  class="focus-input100-1">
+                                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Exam Key!</b></span>
+                            </span>
+                        </div>
+                        
+                        <div class="col-sm-6 m-t-15" ng-class="{ 'has-error': form1.$submitted && form1.timelimit.$invalid }" >
+                            <input type="number" name="timelimit" ng-maxlength="3" class="options100 form-control" ng-model="hm.time_limit" placeholder="Time Duration(in mins)" required>
+                            <span ng-messages="form1.$submitted && form1.timelimit.$error"  class="focus-input100-1">
+                                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter exam time Limit!</b></span>
+                            </span>
+                            <span ng-show="form1.timelimit.$error.maxlength" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Maximum length reached</b></span>                                
+                            </div>
+                    </div>
+                    <div class="row m-t-15  p-t-5 p-r-5 p-b-5 p-l-5">
+                        <div class="col"></div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary btn-sm">Submit Question Paper</button>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                </form>    
+                
+                
+                </div>
+    </div>
+</div>
+
+        

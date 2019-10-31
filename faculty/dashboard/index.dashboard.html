@@ -1,0 +1,62 @@
+
+    <nav class="navbar fixed-top navbar-light" style="background-color:#7e8082;">
+        <span class="navbar-brand">{{dsh.uname}}</span>        
+        <div class="white-fonts" >
+            <a class="pointer nav-links"  href="#!home">Home</a>|
+            <a class="context-menu nav-links" href="#!dashboard">History</a>      
+            
+        </div>
+        <button class="btn btn-outline-dark" type="button" ng-click="dsh.logout()">Logout</button>
+    </nav>
+    <div class="container-dashboard100 m-t-10" >
+        <div class="wrap-dashboard100 p-l-55 p-r-55 p-t-65 p-b-50 m-b-10"   >
+                <form name="form" ng-submit= "form.$valid && dsh.create()" novalidate>
+                    <span class="question100-form-title m-t-10 m-b-20">Test History</span>
+
+                    
+                   <div class="table-responsive">
+                    <table  class="table table-bordered">
+                        <tr>
+                            <th>#</th>                            
+                            <th>Test Series</th>
+                            <th>Topic</th>
+                            <th>Semester</th>
+                            <th>Exam Key</th>
+                            <th>Click to View details</th>
+                            
+                        </tr>
+                        <tr ng-repeat="item in dsh.items">
+                            <td>{{$index+1}}</td>
+                            <td>{{item.ia}}</td>
+                            <td ng-click="dsh.goToUpdatePage(item.item_password)" class="btn-link"><a class="pointer">{{item.subject}}</a></td>                             
+                            <td>{{item.semester}}</td>
+                            <td>
+                                <div>
+                                    <label class="switch">
+                                            <input type="checkbox" ng-change="dsh.change($index)" ng-model="dsh.switches[$index]" id="switch_button">
+                                            <span class="slider round"></span>
+                                    </label>
+                                </div>{{item.item_password}}
+                                
+                            </td>
+                            <td><button type="button" class="btn btn-info btn-sm" ng-click="dsh.detail(item.item_password)">More Details</button></td>
+                            
+                        </tr>
+                    </table>
+                 </div>
+
+                    
+                    <span class="question100-form-title m-t-10 m-b-20">{{dsh.errMsg}}</span>
+                </form>
+        </div>
+    
+
+        <div class="wrap-questions100 p-l-55 p-r-55 p-t-20 p-b-50 readonly" ng-show="dsh.success">
+                  
+           
+        </div>
+    </div>    
+            
+    
+
+
