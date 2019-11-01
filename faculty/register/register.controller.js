@@ -28,10 +28,10 @@ function Controller($location, $rootScope, RegistrationService){
 
 
 
-    //window.location.href = "#!/dashboard";
+    
 
   }
 
-
+//window.location.href = "#!/dashboard";
 
 }
