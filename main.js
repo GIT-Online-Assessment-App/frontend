@@ -42,10 +42,33 @@ app.config(function($routeProvider){
 .run(run);
 function run($rootScope, $http, $location, $localStorage) {
         $rootScope.URLs = {
-        "ip" : "http://192.168.43.27"
+        //"ip" : "http://192.168.43.27"
         //"ip"  : "http://10.10.2.219"
-        //"ip" : "http://10.10.24.27"
+        "ip" : "http://192.168.43.27"
         }
+
+
+        //code to disable INSPECT ELEMENT
+        /* $(document).keydown(function(e){
+          if(e.which === 123){
+             return false;
+          }
+          else if ((e.ctrlKey && e.shiftKey && e.keyCode == 73) 
+          || (e.ctrlKey && e.shiftKey && e.keyCode == 74) 
+          || (e.ctrlKey && e.keyCode == 85) //code to prevent user from switching between Browser tabs
+          || (e.ctrlKey && e.keyCode == 49)
+          || (e.ctrlKey && e.keyCode == 50) 
+          || (e.ctrlKey && e.keyCode == 51)
+          || (e.ctrlKey && e.keyCode == 52)
+          || (e.ctrlKey && e.keyCode == 53)
+          || (e.ctrlKey && e.keyCode == 54)
+          || (e.ctrlKey && e.keyCode == 55)
+          || (e.ctrlKey && e.keyCode == 56)
+          || (e.ctrlKey && e.keyCode == 57)) {
+            
+            return false;
+        }
+      }); */
 
         // keep user logged in after page refresh
         if ($localStorage.currentUser) {
@@ -90,4 +113,3 @@ function run($rootScope, $http, $location, $localStorage) {
 
     
 
-//122.252.229.198/prof

@@ -36,7 +36,7 @@
 				<span ng-messages="form.$submitted && form.password.$error"  class="focus-input100-1">
 					<span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Password is required</b></span>
 				</span>
-				<span ng-show="form.password.$invalid" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 20%;"><b>Password should be min. 6 characters long</b></span>
+				<span ng-show="form.password.$error.minlength" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 20%;"><b>Password should be min. 6 characters long</b></span>
 				
 				
 			</div>
@@ -57,8 +57,21 @@
 			
 			
 			<div class="container-login100-form-btn m-t-20">
-				<button class="login100-form-btn"  ng-disabled="rg.password != rg.password1">
+				<button class="login100-form-btn"  ng-disabled="rg.loading">					
 					Sign up
+					<img ng-if="rg.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAA
+						MLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWphe
+						GxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUm
+						cG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu
+						7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAE
+						AAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfv
+						wQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DY
+						lJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgX
+						GJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQO
+						RfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAA
+						AAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLW
+						zpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjC
+						YRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 				</button>
 			</div>
 			

@@ -14,7 +14,7 @@ function Controller($location, AuthenticationService){
       console.log(result);
       if(result.status == 'success'){        
         
-        alert('Welcome '+result.username+'!'+' Token: '+ result.token);
+        alert('Welcome '+result.username+'!');
         window.location.href = '#!dashboard';
 
       }else if(result.status =='failed'){

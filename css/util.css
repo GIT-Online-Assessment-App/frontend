@@ -3124,5 +3124,11 @@ select{
 
   /*Toggle switch ends*/
 
-
+  .about-us-div{
+	background-color: rgb(212, 20, 20);
+	
+}
+.img-size{
+	max-height: 36px;
+}
 

@@ -1,5 +1,5 @@
     <nav class="navbar fixed-top navbar-light" style="background-color:#7e8082;">
-        <span class="navbar-brand">{{dtl.uname}}</span>
+        <a  href="" class="navbar-brand" ng-click="dtl.dashboard()">{{dtl.uname}}</a>
         <span class="navbar-brand">This is Detail Page</span>
         <span class="navbar-brand">{{dtl.itempass}}</span>
         <button class="btn btn-outline-dark" type="button" ng-click="dtl.logout()">Logout</button>
@@ -30,15 +30,18 @@
                             <th>USN</th>
                             <th>Student Name</th>                                                    
                             <th>Score</th>
+                            <th> <button class="btn btn-danger btn-sm" ng-click="dtl.deleteResponse()">Delete selected responses</button> </th>
                         </tr>
-                        <tr ng-repeat='item in dtl.responses.response_list | filter: dtl.searchCriteria |  orderBy : -item.username' data-toggle="modal" data-target="#myModal" ng-click="dtl.dispModal(item)">
+                        <tr ng-repeat='item in dtl.responses.response_list | filter: dtl.searchCriteria |  orderBy : -item.username' ng-style="bool[$index+1] ? dtl.marked : dtl.unmarked" >
                             <td>{{$index+1}} </td>
                             <td>{{item.usn}}</td>
-                            <td class="capitalize">{{item.username }}</td>
-                            <td>{{item.score}}</td>                           
+                            <td class="capitalize" >  <button class="btn btn-link" data-toggle="modal" data-target="#myModal" ng-click="dtl.dispModal(item)">{{item.username }}1</button> </td>
+                            <td>{{item.score}}</td>   
+                            <td> <input type="checkbox" value="{{item.email_id}}"  ng-change="dtl.sync(item.email_id, bool[$index+1])" ng-model="bool[$index+1]"> {{item.email_id}} </td>                        
                             
                         </tr>
                     </table>
+                    
 
                     <!--modal begin-->                            
                     <div class="modal fade" id="myModal">

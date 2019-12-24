@@ -29,10 +29,12 @@
                 <div><strong>Cannot edit this Quiz!</strong></div>
                 <div class="row" ng-repeat="errMsg in upd.errMsgs">
                     
-                    <div class="col">
-                            
-                            {{errMsg}}
+                    <div class="col" ng-if="errMsg=='RESPONSES_GIVEN_ERR'">                            
+                            {{errMsg }}: <small>You cannot update this Quiz as some of the students have already responded to it</small>
                     </div>
+                    <div class="col" ng-if="errMsg=='GATE_OPEN_ERR'">                            
+                        {{errMsg }}: <small>Please CLOSE the gate to update this Quiz</small>
+                </div>
                 </div>
             </div>
             <form name="form1" class="login100-form validate-form" ng-submit= "form1.$valid && upd.submit()" novalidate>
@@ -102,7 +104,6 @@
                     </div>
             </form>
         </div>
-        <div class="msg">{{upd.questions}}</div>
-        <div class="msg">{{upd.data}} 11</div>
+        
     </div>
 </div>

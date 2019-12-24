@@ -5,7 +5,18 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
     dtl.list=[1,2,3,4,5,6];
     dtl.logout = logout;
     dtl.dispModal = dispModal;
+    dtl.dashboard = dashboard;
     dtl.success1 = false;
+    dtl.deleteResponse = deleteResponse;
+    
+    dtl.marked = {
+        "background-color" : "#fcacac"
+    }
+    dtl.unmarked = {
+        "background-color" : "#fff"
+    }
+    dtl.sync = sync;
+    dtl.deleteResponsesArr = [];
     dtl.correct = {        
         "background" : "#c0f0cd"
     }
@@ -26,9 +37,9 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
             dtl.itempass = $routeParams.keyw;
             DashboardService.getResponses(dtl.itempass, function(result){
                 if(result.status=='success'){
-                    dtl.responses = result;
+                    dtl.responses = result;                   
                     dtl.success1 = true;
-                    console.log(dtl.responses);
+                    
                 
                 }
             });
@@ -41,16 +52,63 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
      }
     };
 
+    function dashboard(){
+        window.location.href = "#!dashboard";
+    }
+
     function dispModal(item){
         dtl.username = item.username;
         dtl.score = item.score;
         dtl.usn = item.usn;
         dtl.question_paper = dtl.responses.question_paper;
-
+        
         dtl.student_response = item.student_response;
 
     }
 
+    function deleteResponse(){
+        if(dtl.deleteResponsesArr.length > 0){
+            dtl.confirm = confirm('click OK if you are sure about deleting these '+ dtl.deleteResponsesArr.length+' response(s).' );
+            if(dtl.confirm){
+
+                dtl.data = {
+                    "item_password" : dtl.responses.item_password,
+                    "email_ids" : dtl.deleteResponsesArr
+                }
+                 DashboardService.deleteResponses(dtl.data, function(result){
+                    if(result.status == 'success'){
+                        alert('deleted successfully');
+                        location.reload();
+                    }else{
+                        alert(result);
+                    }
+                }); 
+            }
+
+
+
+            
+        }else{
+            alert('Please Select student responses to delete!');
+        }
+        
+
+        
+    }
+
+    function sync(email, bool){
+        if(bool){
+            // add item
+            dtl.deleteResponsesArr.push(email);
+          } else {
+            // remove item
+            for(var i=0 ; i < dtl.deleteResponsesArr.length; i++) {
+              if(dtl.deleteResponsesArr[i] == email){
+                dtl.deleteResponsesArr.splice(i,1);
+              }
+            }      
+          }
+    }
     
 
 

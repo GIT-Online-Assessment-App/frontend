@@ -31,14 +31,12 @@ function Controller($location,$localStorage,DashboardService,$interpolate, Authe
                             dsh.switches[i] = true;
                         }
                         
-                        console.log(dsh.items[i]);
+                        
                     }
-                    console.table(dsh.items);
-                    console.log($localStorage.currentUser.item_array);
+                   
                 }else{
                     dsh.errMsg = 'No Activities Yet!';
-                    console.log(dsh.errMsg);
-                    console.table(dsh.results);
+                    
                 }
             }            
         });
@@ -50,7 +48,7 @@ function Controller($location,$localStorage,DashboardService,$interpolate, Authe
         if(item_pass != '' && $localStorage.currentUser.item_array.includes(item_pass)){
             dsh.keyw = item_pass
             dsh.url  = $interpolate('/details/{{keyw}}')(dsh);
-            console.log(dsh.url);
+            
             $location.path(dsh.url);
         }else{
             alert(item_pass+' Not found!!');
