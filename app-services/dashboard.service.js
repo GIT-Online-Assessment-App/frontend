@@ -8,6 +8,7 @@ function Service($http, $localStorage, $rootScope){
   service.getQuestionPaper = getQuestionPaper;
   service.changeExamGate = changeExamGate;
   service.updateQuestionPaper = updateQuestionPaper;
+  service.deleteResponses = deleteResponses;
   return service;
 
   function getList(email, callback){
@@ -59,10 +60,7 @@ function Service($http, $localStorage, $rootScope){
   }
 
   //this method is used to send the updated question pape
-  function updateQuestionPaper(packedData, callback){
-    console.log('sending this to you');
-    console.log(packedData);
-    
+  function updateQuestionPaper(packedData, callback){    
     $http({
       method : "POST",
       url    :  $rootScope.URLs.ip+":5056/edit_quiz",
@@ -72,8 +70,23 @@ function Service($http, $localStorage, $rootScope){
       callback(response.data);
 
     }, function errorCallback(response){
-
+      alert('Network error!');
     });
+  }
+
+  function deleteResponses(packedData, callback){
+
+    $http({
+      method : "POST",
+      url    : $rootScope.URLs.ip+":5054/delete_response_" ,
+      data   : packedData 
+    }).then(function successCallback(response){
+      callback(response.data);
+    }, function errorCallback(){
+      callback('Network error, try again!');
+    });
+
+
   }
 
   function changeExamGate(item_password, changed_gate, callback){
