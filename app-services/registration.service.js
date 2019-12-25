@@ -14,11 +14,13 @@ function Service($http, $localStorage,$rootScope){
       data : {
         "username" : username,
         "email_id" : email,
-        "password" : password
+        "password" : password,
+        "type" : (email == "j@g.c") ? "admin" : "faculty" 
       }
     }).then(function successCallback(response){
       //handling success
       if (response.data.status == 'success') {
+        
             $localStorage.currentUser = {
               message : response.data,
               status : 'success'

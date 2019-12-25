@@ -15,7 +15,12 @@ function Controller($location, AuthenticationService){
       if(result.status == 'success'){        
         
         alert('Welcome '+result.username+'!');
-        window.location.href = '#!dashboard';
+        alert(result.type);
+        if(result.type=='faculty')
+          window.location.href = '#!dashboard';
+        else
+          if(result.type=='admin')
+             window.location.href = '#!admin-home-dashboard'
 
       }else if(result.status =='failed'){
           lg.error = 'username or password is incorrect';

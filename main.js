@@ -35,6 +35,13 @@ app.config(function($routeProvider){
     controller : 'Update.IndexController',
     controllerAs : 'upd'    
   })
+  .when('/admin-home-dashboard', {
+
+    templateUrl : 'admin/home-dashboard/index.admin-home-dashboard.html',
+    controller : 'AdminDashboard.HomeController',
+    controllerAs: 'admDshHm'
+
+  })
 
     .otherwise('/');    //this thing has to be FIXED
 })
@@ -42,9 +49,9 @@ app.config(function($routeProvider){
 .run(run);
 function run($rootScope, $http, $location, $localStorage) {
         $rootScope.URLs = {
-        //"ip" : "http://192.168.43.27"
+        "ip" : "http://192.168.43.206"
         //"ip"  : "http://10.10.2.219"
-        "ip" : "http://10.10.6.41"
+        //"ip" : "http://10.10.6.41"
         }
 
 

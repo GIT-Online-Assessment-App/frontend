@@ -24,7 +24,8 @@ function Service($http, $localStorage, $rootScope) {
                             status : response.data.status,
                             username: response.data.username,
                             email:response.data.email_id,                            
-                            token: response.data.token
+                            token: response.data.token,
+                            type : response.data.type
                           };
                     // add jwt token to auth header for all requests made by the $http service
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
