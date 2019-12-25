@@ -23,6 +23,7 @@
                             <th>Semester</th>
                             <th>Exam Key</th>
                             <th>Click to View Details</th>
+                            <th>Download Responses (xlsx)</th>
                             
                         </tr>
                         <tr ng-repeat="item in dsh.items">
@@ -40,6 +41,7 @@
                                 
                             </td>
                             <td><button type="button" class="btn btn-info btn-sm" ng-click="dsh.detail(item.item_password)">Student Responses</button></td>
+                            <td> <a href="" ng-click="dsh.download_responses(item.item_password)"> <img src="images/download.png" class="img-thumbnail img-responsive" style="max-height: 30px;" alt="download icon"></a> </td>
                             
                         </tr>
                     </table>

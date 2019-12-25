@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ['ngRoute', 'ngMessages', 'ngStorage']);
+var app = angular.module("myApp", ['ngRoute', 'ngMessages', 'ngStorage', 'tld.csvDownload']);
 
 app.config(function($routeProvider){
   $routeProvider

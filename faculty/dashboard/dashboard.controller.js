@@ -9,6 +9,7 @@ function Controller($location,$localStorage,DashboardService,$interpolate, Authe
     dsh.detail = detail;
     dsh.change = change;
     dsh.goToUpdatePage = goToUpdatePage;
+    dsh.download_responses = download_responses;
     dsh.goToHome = goToHome;
     dsh.switches = []; 
     //dsh.submit = submit;
@@ -53,6 +54,10 @@ function Controller($location,$localStorage,DashboardService,$interpolate, Authe
         }else{
             alert(item_pass+' Not found!!');
         }
+    }
+
+    function download_responses(aa){
+        alert(aa);
     }
 
     function goToUpdatePage(item_pass){

@@ -7,6 +7,8 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
     dtl.dispModal = dispModal;
     dtl.dashboard = dashboard;
     dtl.success1 = false;
+    dtl.data = {};
+    dtl.download_responses = download_responses;
     dtl.deleteResponse = deleteResponse;
     
     dtl.marked = {
@@ -66,6 +68,8 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
 
     }
 
+
+
     function deleteResponse(){
         if(dtl.deleteResponsesArr.length > 0){
             dtl.confirm = confirm('click OK if you are sure about deleting these '+ dtl.deleteResponsesArr.length+' response(s).' );
@@ -94,6 +98,22 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
         
 
         
+    }
+
+    function download_responses(item_pass){
+        alert(item_pass);
+
+        dtl.data.exportFileName = item_pass+'.csv';
+        dtl.data.displayLabel = 'download csv';
+        dtl.data.myHeaderData = {
+            SlNo : '#Serial',
+            usn : 'USN',
+            name : 'Student Name',
+            score : 'Score'
+        };
+        dtl.data.myInputArray = dtl.responses.response_list;
+
+
     }
 
     function sync(email, bool){
