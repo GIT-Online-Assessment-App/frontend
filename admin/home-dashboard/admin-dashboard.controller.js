@@ -3,6 +3,7 @@ app.controller("AdminDashboard.HomeController", Controller);
 function Controller($localStorage,DashboardService,AdminService, AuthenticationService){
     var admDshHm = this;
     admDshHm.logout = logout;
+    admDshHm.newQBank = newQBank;
 
     initController();
     function initController(){
@@ -18,6 +19,10 @@ function Controller($localStorage,DashboardService,AdminService, AuthenticationS
 
 
         }
+    }
+
+    function newQBank(){
+        alert('hihi');
     }
 
     function logout(){
