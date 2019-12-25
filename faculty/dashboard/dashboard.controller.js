@@ -18,7 +18,7 @@ function Controller($location,$localStorage,DashboardService,$interpolate, Authe
      if($localStorage.currentUser){
         dsh.uname = $localStorage.currentUser.username;
         DashboardService.getList($localStorage.currentUser.email, function(result){
-
+            console.log(result);//remove later
             if(result.status=='success'){                
                 if(result.items.length > 0){
                     dsh.items = result.items;
