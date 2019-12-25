@@ -14,8 +14,7 @@ function Controller($location, AuthenticationService){
       console.log(result);
       if(result.status == 'success'){        
         
-        alert('Welcome '+result.username+'!');
-        alert(result.type);
+        alert('Welcome '+result.username+'!');        
         if(result.type=='faculty')
           window.location.href = '#!dashboard';
         else
