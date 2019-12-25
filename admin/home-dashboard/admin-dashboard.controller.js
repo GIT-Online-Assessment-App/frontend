@@ -7,6 +7,7 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
     function initController(){
         if($localStorage.currentUser){
             admDshHm.uname = $localStorage.currentUser.username;
+            admDshHm.type = $localStorage.currentUser.type;
         }
     }
 

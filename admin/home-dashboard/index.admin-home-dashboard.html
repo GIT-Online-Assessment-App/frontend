@@ -1,8 +1,9 @@
 <nav class="navbar fixed-top navbar-light" style="background-color:#7e8082;">
-    <span class="navbar-brand">Admin: {{admDshHm.uname}}</span>        
+    <span class="navbar-brand"><small>{{admDshHm.type}}</small> {{admDshHm.uname}}</span>        
     <div class="white-fonts" >
-        <a class="pointer nav-links"  href="#!home">New Test</a>|
-        <a class="context-menu nav-links" href="#!dashboard">History</a>      
+        <a class="pointer nav-links"  href="">New Test</a>|
+        <a class="context-menu nav-links" href="#!dashboard">History</a> |
+        <a class="context-menu nav-links" ng-show="admDshHm.type=='admin'" href="#!admin-home-dashboard">Question Banks</a>      
         
     </div>
     <button class="btn btn-outline-dark" type="button" ng-click="admDshHm.uname">Logout</button>
