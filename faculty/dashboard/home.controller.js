@@ -34,7 +34,9 @@ function Controller($localStorage,QuestionPaperService, AuthenticationService) {
         function create(){
             hm.ok = confirm('Once Submitted you cannot change this inoformation!');
             if(hm.ok){
+                //alert(hm.success);
                 QuestionPaperService.getCode(hm.uname, hm.item_type, hm.subject,hm.ia_no, hm.semester, function(result){
+                    
                     if(result.item_name){
 
                         alert(result.item_name);
