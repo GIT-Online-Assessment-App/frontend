@@ -2,6 +2,7 @@ app.controller("AdminDashboard.HomeController", Controller);
 
 function Controller($localStorage,DashboardService,$routeParams, AuthenticationService){
     var admDshHm = this;
+    admDshHm.logout = logout;
 
     initController();
     function initController(){
@@ -11,6 +12,9 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
         }
     }
 
+    function logout(){
+        AuthenticationService.Logout();        
+    } 
 
 
 }

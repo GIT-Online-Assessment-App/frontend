@@ -12,6 +12,7 @@ function Controller($localStorage,QuestionPaperService, AuthenticationService) {
     if($localStorage.currentUser){        
         hm.uname = $localStorage.currentUser.username;
         hm.email = $localStorage.currentUser.email;
+        hm.type = $localStorage.currentUser.type;
         hm.submit = submit;
         hm.events = ["QUIZ"];
         hm.sems = [1,2,3,4,5,6,7,8];
