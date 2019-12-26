@@ -5,6 +5,7 @@ function Service($http, $localStorage, $rootScope){
     var service = {};
 
     service.getQBankList = getQBankList;
+    service.new_qb = new_qb;
 
     return service;
 
@@ -19,6 +20,23 @@ function Service($http, $localStorage, $rootScope){
         }, function errorCallback(response){
 
         });
+    }
+
+    function new_qb(name, desc, callback){
+        $http({
+            method : "POST",
+            url: $rootScope.URLs.ip+":5058/new_qb",
+            data : {
+                "qb_name" : name,
+                "description" : desc
+            }
+
+        }).then(function successCallback(response){
+            callback(response.data);
+        }, function errorCallback(response){
+            callback('Network Error!');
+        });
+        
     }
 
 

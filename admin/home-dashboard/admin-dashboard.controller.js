@@ -22,7 +22,21 @@ function Controller($localStorage,DashboardService,AdminService, AuthenticationS
     }
 
     function newQBank(){
-        alert('hihi');
+        AdminService.new_qb(admDshHm.name, admDshHm.description, function(result){
+            if(result.status=='success'){
+                admDshHm.name = "";
+                admDshHm.description="";
+                admDshHm.msg = "Saved Successfully";
+
+                admDshHm.QBankList = result.new_list;
+
+
+            }else if(result.status=='failed'){
+                if(result.error=='qb_name_repeat_error'){
+                    admDshHm.msg = "Error! QBank already exists!";
+                }
+            }
+        });
     }
 
     function logout(){
