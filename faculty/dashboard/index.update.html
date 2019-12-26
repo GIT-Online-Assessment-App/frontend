@@ -31,80 +31,84 @@
                 <div class="row" ng-repeat="errMsg in upd.errMsgs">
                     
                     <div class="col" ng-if="errMsg=='RESPONSES_GIVEN_ERR'">                            
-                            {{errMsg }}: <small>You cannot update this Quiz as some of the students have already responded to it</small>
+                        {{errMsg }}: <small>You cannot update this Quiz as some of the students have already responded to it</small>
                     </div>
                     <div class="col" ng-if="errMsg=='GATE_OPEN_ERR'">                            
                         {{errMsg }}: <small>Please CLOSE the gate to update this Quiz</small>
-                </div>
+                    </div>
                 </div>
             </div>
             <form name="form1" class="login100-form validate-form" ng-submit= "form1.$valid && upd.submit()" novalidate>
-                    <fieldset class="question m-t-10"  ng-repeat="column in upd.questions">
-            
-                        <textarea type="text" class="question100" name="question" rows="4" cols="10" ng-model="column.question" placeholder="Please enter the question" required></textarea>
-                        <button class="remove close"  ng-click="upd.removeColumn($index)">&times;</button><br>
-                            
-                            
+                <fieldset class="question m-t-10"  ng-repeat="column in upd.questions">
+                    
+                    <textarea type="text" class="question100" name="question" rows="4" cols="10" ng-model="column.question" placeholder="Please enter the question" required></textarea>
+                    <button class="remove close"  ng-click="upd.removeColumn($index)">&times;</button><br>
+                    
+                    
+                    
+                    <input type="text" class="options100 form-control m-t-10" ng-model="column.options[0]"  placeholder="Option 1" required>
+                    <input type="text" class="options100 form-control m-t-10" ng-model="column.options[1]"  placeholder="Option 2" required>
+                    <input type="text" class="options100 form-control m-t-10" ng-model="column.options[2]"  placeholder="Option 3">
+                    <input type="text" class="options100 form-control m-t-10" ng-model="column.options[3]"  placeholder="Option 4">
+                    
+                    <select name="answer" class="form-control m-t-15 answer100" ng-model="column.answer" required> 
+                        <option value="">Correct Answer</option> 
+                        <option ng-repeat="option in column.options"  value="{{option}}"  >{{option}}</option> 
+                    </select> 
+                    <div class="row m-t-10">
                         
-                            <input type="text" class="options100 form-control m-t-10" ng-model="column.options[0]"  placeholder="Option 1" required>
-                            <input type="text" class="options100 form-control m-t-10" ng-model="column.options[1]"  placeholder="Option 2" required>
-                            <input type="text" class="options100 form-control m-t-10" ng-model="column.options[2]"  placeholder="Option 3">
-                            <input type="text" class="options100 form-control m-t-10" ng-model="column.options[3]"  placeholder="Option 4">
-                            
-                            <select name="answer" class="form-control m-t-15 answer100" ng-model="column.answer" required> 
-                                    <option value="">Correct Answer</option> 
-                                    <option ng-repeat="option in column.options"  value="{{option}}"  >{{option}}</option> 
-                            </select> 
-    
-                                
-                    </fieldset>
-                    <button class="addfields btn btn-outline-secondary" ng-click="upd.addNewColumn()">Add Question</button>
-                    <div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
-                        <div class="col-sm-2" ng-class="{ 'has-error': form1.$submitted && form1.positive_marks.$invalid }">
-                                <small><label for="positive_marks"><b>Positive Marks:</b></label></small>
-                                <input type="number" name="positive_marks" min="1" class="options100 form-control" ng-model="upd.positive_marks"  placeholder="Positive Marks" required>
-                                <span ng-messages="form1.$submitted && form1.positive_marks.$error"  class="focus-input100-1">
-                                    <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Positive Marks for each question!</b></span>
-                                </span>
-                                <span ng-messages="form1.positive_marks.$error" style="color:red; font-size : x-small;">
-                                        <b><span ng-message="number">You did not enter a valid number</span>
-                                        <span ng-message="min">+ive Marks should be > 1!</span>
-                                        <span ng-message="max" ></span></b>
-                                </span>
-                            </div>
-
-
-                            <div class="col-sm-2" ng-class="{ 'has-error': form1.$submitted && form1.negative_marks.$invalid }">
-                                <small><label for="negative_marks"><b>Negative Marks:</b></label></small>
-                                <input type="number" name="negative_marks" max="0" class="options100 form-control" ng-model="upd.negative_marks"  placeholder="Negative marks" required>
-                                <span ng-messages="form1.$submitted && form1.negative_marks.$error"  class="focus-input100-1">
-                                    <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter Negative marks for each WRONG answer!</b></span>
-                                </span>
-                                <span ng-messages="form1.negative_marks.$error" style="color:red; font-size : x-small;">
-                                        <b> <span ng-message="number">You did not enter a valid number</span>
-                                        <span ng-message="min"></span>
-                                        <span ng-message="max">-ive Marks should be <= 0!</span>
-                                    </b>
-                                </span>
-                            </div>
+                        <div class="col p-r-120"> <button ng-click="upd.removeColumn($index)" class="btn btn-danger btn-sm pos-right">Delete Question</button> </div>
+                    </div>
+                    
+                </fieldset>
+                <button class="addfields btn btn-outline-secondary" ng-click="upd.addNewColumn()">Add Question</button>
+                <div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
+                    <div class="col-sm-2" ng-class="{ 'has-error': form1.$submitted && form1.positive_marks.$invalid }">
+                        <small><label for="positive_marks"><b>Positive Marks:</b></label></small>
+                        <input type="number" name="positive_marks" min="1" class="options100 form-control" ng-model="upd.positive_marks"  placeholder="Positive Marks" required>
+                        <span ng-messages="form1.$submitted && form1.positive_marks.$error"  class="focus-input100-1">
+                            <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Positive Marks for each question!</b></span>
+                        </span>
+                        <span ng-messages="form1.positive_marks.$error" style="color:red; font-size : x-small;">
+                            <b><span ng-message="number">You did not enter a valid number</span>
+                                <span ng-message="min">+ive Marks should be > 1!</span>
+                                <span ng-message="max" ></span></b>
+                            </span>
+                        </div>
+                        
+                        
+                        <div class="col-sm-2" ng-class="{ 'has-error': form1.$submitted && form1.negative_marks.$invalid }">
+                            <small><label for="negative_marks"><b>Negative Marks:</b></label></small>
+                            <input type="number" name="negative_marks" max="0" class="options100 form-control" ng-model="upd.negative_marks"  placeholder="Negative marks" required>
+                            <span ng-messages="form1.$submitted && form1.negative_marks.$error"  class="focus-input100-1">
+                                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter Negative marks for each WRONG answer!</b></span>
+                            </span>
+                            <span ng-messages="form1.negative_marks.$error" style="color:red; font-size : x-small;">
+                                <b> <span ng-message="number">You did not enter a valid number</span>
+                                    <span ng-message="min"></span>
+                                    <span ng-message="max">-ive Marks should be <= 0!</span>
+                                </b>
+                            </span>
+                        </div>
                     </div>
                     <div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
-                            <div class="col" ng-class="{ 'has-error': form1.$submitted && form1.timelimit.$invalid }" >
-                                <span>Time Limit</span>
-                                <input type="number" name="timelimit" ng-maxlength="4" class="options100 form-control" ng-model="upd.time_limit" placeholder="Time Limit(in mins)" required>
-                                time duration: {{upd.time_limit}}
-                                <span ng-messages="form1.$submitted && form1.timelimit.$error"  class="focus-input100-1">
-                                    <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter exam time Limit!</b></span>
-                                </span> 
-                                <span ng-show="form1.timelimit.$error.maxlength" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Maximum length reached</b></span>                             
-                            </div>
-                            <div class="col"></div>
-                            <div class="col m-t-25">
-                                    <button type="submit" class="btn btn-primary btn-sm">Update Question Paper</button>
-                            </div>
+                        <div class="col" ng-class="{ 'has-error': form1.$submitted && form1.timelimit.$invalid }" >
+                            <span>Time Limit</span>
+                            <input type="number" name="timelimit" ng-maxlength="4" class="options100 form-control" ng-model="upd.time_limit" placeholder="Time Limit(in mins)" required>
+                            time duration: {{upd.time_limit}}
+                            <span ng-messages="form1.$submitted && form1.timelimit.$error"  class="focus-input100-1">
+                                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter exam time Limit!</b></span>
+                            </span> 
+                            <span ng-show="form1.timelimit.$error.maxlength" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Maximum length reached</b></span>                             
+                        </div>
+                        <div class="col"></div>
+                        <div class="col m-t-25">
+                            <button type="submit" class="btn btn-primary btn-sm">Update Question Paper</button>
+                        </div>
                     </div>
-            </form>
+                </form>
+            </div>
+            
         </div>
-        
     </div>
-</div>
+    

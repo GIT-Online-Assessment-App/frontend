@@ -3132,3 +3132,6 @@ select{
 	max-height: 36px;
 }
 
+.pos-right{
+	float:right;
+}

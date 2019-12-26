@@ -23,7 +23,7 @@
                 <tr ng-repeat="qbank in  admDshHm.QBankList">
                     
                     <td>{{$index+1}}</td>
-                    <td> <a href="">{{qbank.name}}</a> </td>
+                    <td ng-click="admDshHm.goToManageQBankPage(qbank.name)"> <a href="">{{qbank.name}}</a> </td>
                     <td>{{qbank.description}}</td>
                     
                 </tr>

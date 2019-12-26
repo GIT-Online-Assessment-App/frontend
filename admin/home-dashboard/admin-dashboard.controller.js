@@ -4,6 +4,7 @@ function Controller($localStorage,DashboardService,AdminService, AuthenticationS
     var admDshHm = this;
     admDshHm.logout = logout;
     admDshHm.newQBank = newQBank;
+    admDshHm.goToManageQBankPage = goToManageQBankPage;
     
     admDshHm.success = {        
         "background" : "#c0f0cd"
@@ -48,6 +49,11 @@ function Controller($localStorage,DashboardService,AdminService, AuthenticationS
                 }
             }
         });
+    }
+
+    function goToManageQBankPage(qb_name){
+        alert(qb_name);
+
     }
 
     function logout(){

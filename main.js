@@ -42,6 +42,11 @@ app.config(function($routeProvider){
     controllerAs: 'admDshHm'
 
   })
+  .when('/manage-qb/:qb_name', {
+    templateUrl : 'faculty/question-bank/index.manage-qb.html',
+    controller : 'Manage.QuestionBankController',
+    controllerAs : 'manageQB'
+  })
 
     .otherwise('/');    //this thing has to be FIXED
 })
