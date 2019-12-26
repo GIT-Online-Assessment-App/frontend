@@ -39,7 +39,7 @@
             <form name="form" ng-submit= "form.$valid && admDshHm.newQBank()" novalidate>
                 
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header" ng-style='admDshHm.status=="success" ? admDshHm.success : admDshHm.failure'>
                     <h6 class="modal-title capitalize"><b>New Question Bank</b></h6>
                     {{admDshHm.msg}}
                     <button type="button" class="close" data-dismiss="modal">&times;</button>

@@ -4,9 +4,18 @@ function Controller($localStorage,DashboardService,AdminService, AuthenticationS
     var admDshHm = this;
     admDshHm.logout = logout;
     admDshHm.newQBank = newQBank;
+    
+    admDshHm.success = {        
+        "background" : "#c0f0cd"
+    }
+    admDshHm.failure = {
+        "background" : "#fff"
+    }
+    
 
     initController();
     function initController(){
+        
         if($localStorage.currentUser){
             admDshHm.uname = $localStorage.currentUser.username;
             admDshHm.email = $localStorage.currentUser.email_id;
@@ -24,6 +33,7 @@ function Controller($localStorage,DashboardService,AdminService, AuthenticationS
     function newQBank(){
         AdminService.new_qb(admDshHm.name, admDshHm.description, function(result){
             if(result.status=='success'){
+                admDshHm.status = "success";
                 admDshHm.name = "";
                 admDshHm.description="";
                 admDshHm.msg = "Saved Successfully";
@@ -33,6 +43,7 @@ function Controller($localStorage,DashboardService,AdminService, AuthenticationS
 
             }else if(result.status=='failed'){
                 if(result.error=='qb_name_repeat_error'){
+                    admDshHm.failure['background'] = "#f7c6c6";
                     admDshHm.msg = "Error! QBank already exists!";
                 }
             }
