@@ -36,20 +36,21 @@
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h6 class="modal-title capitalize"><b>New Question Bank</b></h6>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            
-            <!-- Modal body -->
-            <div class="modal-body wrap-dashboard100">
+            <form name="form" ng-submit= "form.$valid && admDshHm.newQBank()" novalidate>
                 
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title capitalize"><b>New Question Bank</b></h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
                 
-                
-                
-                <form name="form" ng-submit= "form.$valid && admDshHm.newQBank()" novalidate>
+                <!-- Modal body -->
+                <div class="modal-body wrap-dashboard100">
+                    
+                    
+                    
+                    
+                    
                     <fieldset class="question m-t-10">
                         <div class="row">
                             <div class="col-sm-6" ng-class="{ 'has-error': form.$submitted && form.name.$invalid }" >
@@ -59,13 +60,17 @@
                                 </span>                                    
                             </div>
                         </div>
-                        <div class="row m-t-15 p-l-15">
+                        <div class="row m-t-15">
+                            <div class="col" ng-class="{ 'has-error': form.$submitted && form.description.$invalid }" >
                             <textarea type="text" class="question100 m-l-50" name="description" rows="4" cols="30" ng-model="admDshHm.description" placeholder="Please enter the Description" required></textarea>
-                            {{admDshHm.name}}
+                            <span ng-messages="form.$submitted && form.description.$error"  class="focus-input100-1">
+                                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Description!</b></span>
+                            </span>
                         </div>
-                        
-                    </fieldset>
-                </form>
+                    </div>
+                    
+                </fieldset>
+                
                 
                 
                 
@@ -76,8 +81,9 @@
                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-success btn-sm" >Save</button>
             </div>
-            
-        </div>
+        </form>
+        
     </div>
+</div>
 </div>                                  
 <!--modal end-->
