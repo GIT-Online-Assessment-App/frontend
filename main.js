@@ -54,9 +54,9 @@ app.config(function($routeProvider){
 .run(run);
 function run($rootScope, $http, $location, $localStorage) {
         $rootScope.URLs = {
-        "ip" : "http://192.168.43.206"
+        //"ip" : "http://192.168.43.206"
         //"ip"  : "http://10.10.2.219"
-        //"ip" : "http://10.10.6.41"
+        "ip" : "http://10.10.3.160"
         }
 
 
