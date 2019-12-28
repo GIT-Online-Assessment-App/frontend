@@ -1,14 +1,23 @@
 app.controller('Home.IndexController', Controller);
 
-function Controller($localStorage,QuestionPaperService, AuthenticationService) {
+function Controller($localStorage,QuestionPaperService,AdminService,AuthenticationService) {
     var hm = this;
     
     hm.create = create;
     hm.success = false;
+    hm.showForm = false;
+    hm.showButton = true;
     hm.logout = logout;
+    hm.toggleForm = toggleForm;
+    hm.toggleButton = toggleButton;
+    hm.getQuestionBanks = getQuestionBanks;
+    hm.dispNoOfQuestions = dispNoOfQuestions;
+    hm.sync = sync;
     hm.positive_marks = 4;
     hm.negative_marks = -1;
     hm.goToDashboard = goToDashboard;
+    hm.levelsArray = [1,2,3,4,5];
+    hm.requiredLevels = [];
     if($localStorage.currentUser){        
         hm.uname = $localStorage.currentUser.username;
         hm.email = $localStorage.currentUser.email;
@@ -122,6 +131,44 @@ function Controller($localStorage,QuestionPaperService, AuthenticationService) {
 
 
 
+    }
+    function toggleForm(){
+        hm.showForm = !hm.showForm;
+    }
+    function toggleButton(){
+        hm.showButton = !hm.showButton;
+    }
+    function getQuestionBanks(){
+
+        AdminService.getQBankList(hm.email, function(result){
+            hm.qb_list = result.qb_names;
+                     
+            
+        });
+
+    }
+    function dispNoOfQuestions(name){
+        hm.qb_len = hm.qb_list.length;
+        for(let i = 0; i < hm.qb_len; i++){
+            if(hm.qb_list[i].name == name){
+                hm.totalQuestions = hm.qb_list[i].no_of_questions;
+            }
+        }
+
+        hm.tname = name;
+    }
+    function sync(email, bool){
+        if(bool){
+            // add item
+            hm.requiredLevels.push(email);
+        } else {
+            // remove item
+            for(var i=0 ; i < hm.requiredLevels.length; i++) {
+                if(hm.requiredLevels[i] == email){
+                    hm.requiredLevels.splice(i,1);
+                }
+            }      
+        }
     }
 
 
