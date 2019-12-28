@@ -504,6 +504,19 @@ background-color: #4272d7;
   -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
   -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
+.wrap-choice100 {
+  width: 100%;
+  min-height: 10vh;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+}
 .wrap-header{
   width: 100%;
   background-color: transparent;
