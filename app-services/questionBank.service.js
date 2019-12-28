@@ -5,6 +5,7 @@ function Service($http, $localStorage, $rootScope){
 
     service.inserUpdateQuestionBank = inserUpdateQuestionBank;
     service.viewQuestionBank = viewQuestionBank;
+    service.getGeneratedQuestions = getGeneratedQuestions;
     return service;
 
     function viewQuestionBank(qb_name, callback){
@@ -37,6 +38,22 @@ function Service($http, $localStorage, $rootScope){
             }
             callback(errData);
         })
+    }
+
+    function getGeneratedQuestions(data, callback){
+        $http({
+
+            method : "POST",
+            url : $rootScope.URLs.ip+":5059/generate_question_paper",
+            data : data
+
+        }).then(function successCallback(response){
+
+            callback(response.data);
+
+        }, function errorCallback(response){
+
+        });
     }
 
     

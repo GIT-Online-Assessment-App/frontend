@@ -52,8 +52,9 @@ function Controller($location,$localStorage,QuestionBankService,$routeParams, Au
         var len = manageQB.questions.length;
         for(let i = 1; i<=len; i++){
             manageQB.questions[i-1].qno = i.toString();
+            manageQB.questions[i-1].level = parseInt(manageQB.questions[i-1].level);
         }
-        console.log(manageQB.questions);
+        console.log(" testing"+ typeof manageQB.questions[0].level);
         manageQB.data = {
             "qb_name":manageQB.qb_name, 
             "questions" : manageQB.questions                                 
@@ -85,6 +86,8 @@ function Controller($location,$localStorage,QuestionBankService,$routeParams, Au
             && manageQB.questions[manageQB.questions.length-1].answer !== '' 
             && manageQB.questions[manageQB.questions.length-1].level !== ''){
             var newItemNo = manageQB.questions.length+1;
+
+            console.log("type of this is :"+ typeof manageQB.questions[manageQB.questions.length-1].level );
             
             manageQB.questions.push({qno:'', question:'', options:[], answer:'', level:''});
             
