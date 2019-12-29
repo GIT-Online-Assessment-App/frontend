@@ -49,7 +49,7 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <select name="level" class="form-control m-t-15 answer100" ng-model="column.level" required> 
+                            <select name="level"  class="form-control m-t-15 answer100" ng-change="manageQB.test(column.level)" ng-model="column.level" required> 
                                 <option value="">Select Level of the Question</option> 
                                 <option ng-repeat="level in manageQB.levels"  value="{{level}}"  >{{level}}</option> 
                             </select>

@@ -9,6 +9,10 @@ function Controller($location,$localStorage,QuestionBankService,$routeParams, Au
     manageQB.addNewColumn = addNewColumn;
     manageQB.removeColumn = removeColumn;
     manageQB.submit = submit;
+    manageQB.test = test;
+    function test(ab){
+        console.log("manageQB level type: "+ typeof ab);
+    }
 
 
 
@@ -28,6 +32,9 @@ function Controller($location,$localStorage,QuestionBankService,$routeParams, Au
                             manageQB.questions = [{qno:'', question:'', options:[], answer:'', level:''}];
                         }else{
                             manageQB.questions = result.questions;
+                            for(let i = 0; i < manageQB.questions.length; i++){
+                                manageQB.questions[i].level = manageQB.questions[i].level.toString();
+                            }
                         }
 
                     }else{
@@ -48,13 +55,13 @@ function Controller($location,$localStorage,QuestionBankService,$routeParams, Au
     }
 
     function submit(){
-        alert('subsub')
+        
         var len = manageQB.questions.length;
         for(let i = 1; i<=len; i++){
             manageQB.questions[i-1].qno = i.toString();
             manageQB.questions[i-1].level = parseInt(manageQB.questions[i-1].level);
         }
-        console.log(" testing"+ typeof manageQB.questions[0].level);
+        console.log(" testing final data "+ typeof manageQB.questions[0].level);
         manageQB.data = {
             "qb_name":manageQB.qb_name, 
             "questions" : manageQB.questions                                 

@@ -1,0 +1,75 @@
+<div class="row m-t-10">
+    <div class="col-sm-4" ng-class="{ 'has-error': form3.$submitted && form3.qb_semester.$invalid }">
+        <select name="qb_semester" class="form-control m-t-15 custom-select" ng-model="hm.qb_semester" required>
+            <option value="">Semester</option>
+            <option ng-repeat="i in hm.sems"  value="{{i}}"  >{{i}}</option>
+        </select>
+        <span ng-messages="form3.$submitted && form3.qb_semester.$error"  class="focus-input100-1">
+            <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter semester!</b></span>
+        </span>
+    </div>
+    <div class="col-sm-4" ng-class="{ 'has-error': form3.$submitted && form3.qb_ia_no.$invalid }">
+        <div >
+            <select name="qb_ia_no" class="form-control m-t-15 custom-select" ng-model="hm.qb_ia_no" required>
+                <option value="">Test Series</option>
+                <option ng-repeat="item in hm.assessments | orderBy"  value="{{item}}"  >{{item}}</option>
+            </select>
+            <span ng-messages="form3.$submitted && form3.qb_ia_no.$error"  class="focus-input100-1">
+                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter Test Series.!</b></span>
+            </span>
+        </div>
+    </div>
+    <div class="col-sm-4" ng-class="{ 'has-error': form3.$submitted && form3.qb_subject.$invalid }" >
+        <input type="text" name="qb_subject" class="form-control m-t-15" ng-model="hm.qb_subject" placeholder="Enter Topic" required>
+        <span ng-messages="form3.$submitted && form3.qb_subject.$error"  class="focus-input100-1">
+            <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Topic!</b></span>
+        </span>
+    </div>
+</div>  
+
+<div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
+    <div class="col-sm-2" ng-class="{ 'has-error': form3.$submitted && form3.qb_positive_marks.$invalid }">
+        <small><label for="qb_positive_marks"><b>Positive Marks:</b></label></small>
+        <input type="number" name="qb_positive_marks" min="1" class="options100 form-control" ng-model="hm.positive_marks"  placeholder="Positive Marks" required>
+        <span ng-messages="form3.$submitted && form3.qb_positive_marks.$error"  class="focus-input100-1">
+            <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Positive Marks for each question!</b></span>
+        </span>
+        <span ng-messages="form3.qb_positive_marks.$error" style="color:red; font-size : x-small;">
+            <b><span ng-message="number">You did not enter a valid number</span>
+                <span ng-message="min">+ive Marks should be > 1!</span>
+                <span ng-message="max" translate="FORM.MAXVALUE"></span></b>
+            </span>
+        </div>
+        
+        
+        <div class="col-sm-2" ng-class="{ 'has-error': form3.$submitted && form3.qb_negative_marks.$invalid }">
+            <small><label for="qb_negative_marks"><b>Negative Marks:</b></label></small>
+            <input type="number" name="qb_negative_marks" max="0" class="options100 form-control" ng-model="hm.negative_marks"  placeholder="Negative marks" required>
+            <span ng-messages="form3.$submitted && form3.qb_negative_marks.$error"  class="focus-input100-1">
+                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter Negative marks for each WRONG answer!</b></span>
+            </span>
+            <span ng-messages="form3.qb_negative_marks.$error" style="color:red; font-size : x-small;">
+                <b> <span ng-message="number">You did not enter a valid number</span>
+                    <span ng-message="min"></span>
+                    <span ng-message="max">-ive Marks should be <= 0!</span>
+                </b>
+            </span>
+        </div>
+    </div>
+
+    <div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
+        <div class="col-sm-6 m-t-15" ng-class="{ 'has-error': form3.$submitted && form3.qb_skey.$invalid }">
+            <input type="text" name="qb_skey" class="options100 form-control" ng-model="hm.qb_securitykey"  placeholder="Enter exam key" required>
+            <span ng-messages="form3.$submitted && form3.qb_skey.$error"  class="focus-input100-1">
+                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Exam Key!</b></span>
+            </span>
+        </div>
+        
+        <div class="col-sm-6 m-t-15" ng-class="{ 'has-error': form3.$submitted && form3.qb_timelimit.$invalid }" >
+            <input type="number" name="qb_timelimit" ng-maxlength="3" class="options100 form-control" ng-model="hm.qb_time_limit" placeholder="Time Duration(in mins)" required>
+            <span ng-messages="form3.$submitted && form3.qb_timelimit.$error"  class="focus-input100-1">
+                <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter exam time Limit!</b></span>
+            </span>
+            <span ng-show="form3.qb_timelimit.$error.maxlength" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Maximum length reached</b></span>                                
+        </div>
+    </div>

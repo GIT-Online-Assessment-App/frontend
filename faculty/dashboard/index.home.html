@@ -59,9 +59,7 @@
                             <span ng-messages="form.$submitted && form.subject.$error"  class="focus-input100-1">
                                 <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Please enter the Topic!</b></span>
                             </span>                                    
-                        </div>
-                        
-                        
+                        </div>                      
                     </div>
                     <div class="row m-t-20  p-t-5 p-r-5 p-b-5 p-l-5">
                         <div class="col"></div>
@@ -180,71 +178,105 @@
                 </div>
                 
                 <!-- Modal body -->
-                <div class="modal-body wrap-dashboard100">       
-                    
-                    
-                    
-                    
-                    <fieldset class="question m-t-10">
-                        <form name="form2" ng-submit= "form2.$valid && hm.getQuestions()" novalidate>
-                        <div class="row">
-                            <div class="col-sm-7" ng-class="{ 'has-error': form2.$submitted && form2.qb_name.$invalid }" >
-                                
-                                <select name="qb_name" class="form-control m-t-15 custom-select" ng-change="hm.dispNoOfQuestions(hm.qb_name)" ng-model="hm.qb_name" required> 
-                                    <option value="">Select Question Bank</option> 
-                                    <option ng-repeat="qbank in hm.qb_list | orderBy"  value="{{qbank.name}}"  >{{qbank.name}}</option> 
-                                </select>
-                                <small>Available #questions: <b>{{hm.totalQuestions}}</b></small> 
-                                <span ng-messages="form2.$submitted && form2.qb_name.$error"  class="focus-input100-1">
-                                    <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Select the QuestionBank!</b></span>
-                                </span>                                    
-                            </div>
-                        </div>
+                <div ng-show="hm.showQRequirement">
+                    <div  class="modal-body wrap-dashboard100">    
                         
-                        <div class="row m-t-15">
-                            <div class="col-sm-8" ng-class="{ 'has-error': form2.$submitted && form2.nRequiredQuestions.$invalid }" >
-                                <input type="number" name="nRequiredQuestions" min="1" ng-max="hm.totalQuestions" ng-maxlength="3" class="options100 form-control" ng-model="hm.nRequiredQuestions" placeholder="#Questions Required" required>
-                                <span ng-messages="form2.$submitted && form2.nRequiredQuestions.$error"  class="focus-input100-1">
-                                    <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Enter Required #Questions!</b></span>
-                                </span>
-                                <span ng-show="form2.nRequiredQuestions.$error.max || form2.nRequiredQuestions.$error.min" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 30%;"><b>Not in the range 1..{{hm.totalQuestions}}</b></span>                                
-                            </div>
-                        </div>
+                        <fieldset  class="question m-t-10">
+                            <form name="form2" ng-submit= "form2.$valid && hm.getQuestions()" novalidate>
+                                <div class="row">
+                                    <div class="col-sm-7" ng-class="{ 'has-error': form2.$submitted && form2.qb_name.$invalid }" >
+                                        
+                                        <select name="qb_name" class="form-control m-t-15 custom-select" ng-change="hm.dispNoOfQuestions(hm.qb_name)" ng-model="hm.qb_name" required> 
+                                            <option value="">Select Question Bank</option> 
+                                            <option ng-repeat="qbank in hm.qb_list | orderBy"  value="{{qbank.name}}"  >{{qbank.name}}</option> 
+                                        </select>
+                                        <small>Available #questions: <b>{{hm.totalQuestions}}</b></small> 
+                                        <span ng-messages="form2.$submitted && form2.qb_name.$error"  class="focus-input100-1">
+                                            <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Select the QuestionBank!</b></span>
+                                        </span>                                    
+                                    </div>
+                                </div>
+                                
+                                <div class="row m-t-15">
+                                    <div class="col-sm-8" ng-class="{ 'has-error': form2.$submitted && form2.nRequiredQuestions.$invalid }" >
+                                        <input type="number" name="nRequiredQuestions" min="1" ng-max="hm.totalQuestions" ng-maxlength="3" class="options100 form-control" ng-model="hm.nRequiredQuestions" placeholder="#Questions Required" required>
+                                        <span ng-messages="form2.$submitted && form2.nRequiredQuestions.$error"  class="focus-input100-1">
+                                            <span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Enter Required #Questions!</b></span>
+                                        </span>
+                                        <span ng-show="form2.nRequiredQuestions.$error.max || form2.nRequiredQuestions.$error.min" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 30%;"><b>Not in the range 1..{{hm.totalQuestions}}</b></span>                                
+                                    </div>
+                                </div>
+                                
+                                <div class="row m-t-15">
+                                    <div class="col-sm-8" ng-class="{ 'has-error': form2.$submitted && form2.levelsArray.$invalid }" >
+                                        <span ng-repeat="level in hm.levelsArray">
+                                            &emsp;
+                                            <label> <input type="checkbox" name="levelsArray"   value="{{level}}" ng-change="hm.sync(level, bool[$index+1])"  ng-model="bool[$index+1]"> <small>Level{{level}}</small></label>
+                                        </span>
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                                <div class="row m-t-10">
+                                    <div class="col">
+                                        <button type="submit" class="btn btn-success btn-sm" >Generate Questions</button>
+                                    </div>
+                                </div> 
+                                <div class="m-t-10">
+                                    <div class="alert alert-info" ng-show="hm.nQuestionsGenerated">
+                                        <strong>Info!</strong> Click "Generate Questions" to generate different set of questions
+                                        <br/> <small> <b> Note: </b>{{hm.notes[0]}}</small>
+                                        <br/> <small><b>Required #Qns:</b> {{hm.notes[1]}}</small>
+                                        <br/> <small><b>Generated #Qns:</b> {{hm.notes[2]}}</small>
+                                    </div>
+                                    
+                                    
+                                    <div class="wrap-responses100 m-t-5 p-l-10 p-t-10 p-r-10 p-b-10"  ng-repeat="g_question in hm.generated_questions">                                    
+                                        <span>{{g_question.question}} <br/> {{g_question.answer}} </span>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                            </form>                  
+                            
+                        </fieldset>               
                         
-                        <div class="row m-t-15">
-                            <div class="col-sm-8" ng-class="{ 'has-error': form2.$submitted && form2.levelsArray.$invalid }" >
-                                <span ng-repeat="level in hm.levelsArray">
-                                    &emsp;
-                                    <input type="checkbox" name="levelsArray"   value="{{level}}" ng-change="hm.sync(level, bool[$index+1])"  ng-model="bool[$index+1]"> <small>Level{{level}}</small>
-                                </span>
-                                
-                                
-                                
-                            </div>
-                        </div>
-                        <div class="row m-t-10">
-                            <div class="col">
-                                <button type="submit" class="btn btn-success btn-sm" >Generate Question paper</button>
-                            </div>
-                        </div> 
-                    </form>                     
+                        
+                    </div>
                     
                     
-                </fieldset>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+                        <button type="button" ng-disabled="!hm.nQuestionsGenerated" ng-click="hm.toggleModalItem()"  class="btn btn-success btn-sm" >Proceed>></button>
+                    </div>
+                    <!--here-->
+                </div>
                 
+                <div ng-show="hm.showQPDetail">
+                    <form name="form3" ng-submit= "form3.$valid && hm.createQPaper()" novalidate>
+                        <!--Modal Body to get Question paper details like positive and negative marks, etc-->
+                        <div  class="modal-body wrap-dashboard100">
+                            <div class="m-t-10" ng-include="'faculty/dashboard/inputsFromModal.html'"></div>
+                        </div>
+                        <!--Modal footer for QUestion paper Details(for button that creates QP)-->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="hm.toggleModalItem()"> Previous</button>
+                            <button type="submit" ng-disabled="!form3.$valid"  class="btn btn-success btn-sm" >Create QP</button>
+                        </div>
+                    </form>
+                </div>
                 
                 
                 
             </div>
-            
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success btn-sm" >Save</button>
-            </div>
-            
-            
         </div>
-    </div>
-</div>                                  
-<!--modal end-->
+    </div>                                  
+    <!--modal end-->
+    
+    <!--Modal to accept Question Paper details like Exam Duration, Exam Pass Key, Semester, Negative and Positive marks-->
+    
+    
+    

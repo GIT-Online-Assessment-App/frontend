@@ -44,7 +44,7 @@
                             <td>{{item.usn}}</td>
                             <td class="capitalize" >  <button class="btn btn-link" data-toggle="modal" data-target="#myModal" ng-click="dtl.dispModal(item)">{{item.username }}1</button> </td>
                             <td>{{item.score}}</td>   
-                            <td> <input type="checkbox" value="{{item.email_id}}"  ng-change="dtl.sync(item.email_id, bool[$index+1])" ng-model="bool[$index+1]"> {{item.email_id}} </td>                        
+                            <td> <label> <input type="checkbox" value="{{item.email_id}}"  ng-change="dtl.sync(item.email_id, bool[$index+1])" ng-model="bool[$index+1]"> {{item.email_id}} </label></td>                        
                             
                         </tr>
                     </table>
