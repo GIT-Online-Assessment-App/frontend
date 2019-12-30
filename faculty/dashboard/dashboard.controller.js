@@ -58,7 +58,7 @@ function Controller($location,$localStorage,DashboardService,$interpolate, Authe
     }
 
     function download_responses(aa){
-        alert(aa);
+        alert("coming Soon!");
     }
 
     function goToUpdatePage(item_pass){

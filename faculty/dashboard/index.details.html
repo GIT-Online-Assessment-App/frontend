@@ -13,13 +13,8 @@
                     <div class="row m-b-20">
                         <div class="col">Total Responses: {{dtl.responses.responses_count}}</div>
                         <div class="col">Average Score: {{dtl.responses.average}}</div>
-                        <div class="col"> <a href="" ng-click="dtl.download_responses(dtl.itempass)"> <img src="images/download.png" class="img-thumbnail img-responsive" style="max-height: 30px;" alt="download icon"><small> Download responses</small></a></div>
-                        <!-- <csv-download
-                        filename="{{dtl.data.exportFilename}}"
-                        label="{{dtl.data.displayLabel}}"
-                        column-header="dtl.data.myHeaderData"
-                        input-array="dtl.data.myInputArray">
-                         </csv-download> -->
+                        <div class="col"> <a href="" ng-click="dtl.download()"> <img src="images/download.png" class="img-thumbnail img-responsive" style="max-height: 30px;" alt="download icon"><small> Download responses</small></a></div>
+                        
                 </div>
                 
                 

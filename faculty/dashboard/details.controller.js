@@ -9,7 +9,9 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
     dtl.dashboard = dashboard;
     dtl.success1 = false;
     dtl.data = {};
-    dtl.download_responses = download_responses;
+    dtl.download = download;
+    dtl.exportCSVFile = exportCSVFile;
+    dtl.convertToCSV = convertToCSV;
     dtl.deleteResponse = deleteResponse;
     
     dtl.marked = {
@@ -19,7 +21,7 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
         "background-color" : "#fff"
     }
     dtl.sync = sync;
-    dtl.deleteResponsesArr = [];
+    dtl.deleteResponsesArr = [];    //array which will contain the emails of the responses to be deleted
     dtl.correct = {        
         "background" : "#c0f0cd"
     }
@@ -34,14 +36,18 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
     
     initController();
     function initController(){
+        //check if user is logged in
         if($localStorage.currentUser){
             dtl.uname = $localStorage.currentUser.username;
+            //check if the array includes the item_password present in teh route_parameters
             if( $localStorage.currentUser.item_array.includes($routeParams.keyw)){
                 dtl.itempass = $routeParams.keyw;
                 DashboardService.getResponses(dtl.itempass, function(result){
                     if(result.status=='success'){
                         dtl.responses = result;                   
                         dtl.success1 = true;
+                        dtl.downloadCSVData = result;
+                        console.log(dtl.downloadCSVData)
                         
                         
                     }
@@ -101,22 +107,88 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
         
     }
     
-    function download_responses(item_pass){
-        alert(item_pass);
-        
-        /* dtl.data.exportFileName = item_pass+'.csv';
-        dtl.data.displayLabel = 'download csv';
-        dtl.data.myHeaderData = {
-            SlNo : '#Serial',
-            usn : 'USN',
-            name : 'Student Name',
-            score : 'Score'
+    function download(){
+        var title = {
+            title : "Avg Marks: "+ dtl.downloadCSVData.average,
+            subject : "Test Key: " +dtl.downloadCSVData.item_password,
+            attendance: "#Students Attended: "+dtl.downloadCSVData.responses_count+ "  \n\n" 
+
+        }
+        var headers = {
+            
+            username: 'Student Name'.replace(/,/g, ''), // remove commas to avoid errors
+            usn: "USN",
+            score: "Score",
+            email_id: "email"
         };
-        dtl.data.myInputArray = dtl.responses.response_list; */
-        
-        
-        
-        
+      
+        itemsNotFormatted = dtl.downloadCSVData.response_list;
+      
+        var itemsFormatted = [];
+      
+        // format the data
+        itemsNotFormatted.forEach((item) => {
+            itemsFormatted.push({
+                username: item.username, // remove commas to avoid errors,
+                usn: item.usn.bold,
+                score: item.score,
+                email_id: item.email_id
+            });
+        });
+      
+        var fileTitle = 'QUIZ_Results_'+dtl.downloadCSVData.item_password; // or 'my-unique-title'
+      
+        exportCSVFile(headers,title, itemsFormatted, fileTitle); // call the exportCSVFile() function to process the JSON and trigger the download
+      }
+
+      function exportCSVFile(headers,title, items, fileTitle) {
+        if (headers) {
+            items.unshift(headers);
+        }
+        if (title) {
+            items.unshift(title);
+        }
+    
+        // Convert Object to JSON
+        var jsonObject = JSON.stringify(items);
+    
+        var csv = dtl.convertToCSV(jsonObject);
+    
+        var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+    
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, exportedFilenmae);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", exportedFilenmae);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    }
+    function convertToCSV(objArray) {
+        var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+        var str = '';
+    
+        for (var i = 0; i < array.length; i++) {
+            var line = '';
+            for (var index in array[i]) {
+                if (line != '') line += ','
+    
+                line += array[i][index];
+            }
+    
+            str += line + '\r\n';
+        }
+    
+        return str;
     }
     
     function sync(email, bool){
@@ -166,4 +238,10 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
 }//end of Controller
 
 
-
+function download_responses(item_pass){
+    alert(item_pass);
+    
+    
+    
+    
+}

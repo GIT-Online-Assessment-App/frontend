@@ -11,7 +11,7 @@ function Controller($location, AuthenticationService){
   function login(){
     lg.loading = true;
     AuthenticationService.Login(lg.email, lg.password, function(result){
-      console.log(result);
+      
       if(result.status == 'success'){        
         
         alert('Welcome '+result.username+'!');        

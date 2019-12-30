@@ -65,11 +65,11 @@ function Controller($location,$localStorage,DashboardService,$routeParams, Authe
             if(result.status =='success'){
                 console.log('done');
                 alert("Question Paper Updated Successfully!");
-                /*$(document).ready(function() {
+                $(document).ready(function() {
                     
                     $('.readonly').find('input, textarea, select, button').attr('disabled', 'disabled');
                     
-                });*/
+                });
             }else{
                     if(result.error=='exam_key not unique'){
                         alert("Exam key not unique!");
