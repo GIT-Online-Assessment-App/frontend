@@ -69,7 +69,7 @@ function run($rootScope, $http, $location, $localStorage) {
 
         //comment the below block of code during development/testing
         //START: code to disable INSPECT ELEMENT, 
-         /* $(document).keydown(function(e){
+         $(document).keydown(function(e){
           if(e.which === 123){
              return false;
           }
@@ -88,7 +88,7 @@ function run($rootScope, $http, $location, $localStorage) {
             
             return false;
         }
-      });  */
+      }); 
       //END: code to disable INSPECT element
 
         // keep user logged in after page refresh

@@ -11,7 +11,7 @@ function Controller($location,$localStorage,QuestionBankService,$routeParams, Au
     manageQB.submit = submit;
     manageQB.test = test;
     function test(ab){
-        console.log("manageQB level type: "+ typeof ab);
+        //redundant
     }
 
 
@@ -61,13 +61,13 @@ function Controller($location,$localStorage,QuestionBankService,$routeParams, Au
             manageQB.questions[i-1].qno = i.toString();
             manageQB.questions[i-1].level = parseInt(manageQB.questions[i-1].level);
         }
-        console.log(" testing final data "+ typeof manageQB.questions[0].level);
+       
         manageQB.data = {
             "qb_name":manageQB.qb_name, 
             "questions" : manageQB.questions                                 
         }
         QuestionBankService.inserUpdateQuestionBank(manageQB.data, function(result){
-            console.log(result);
+          
             if(result.status=='success'){
                 alert("Question Banl Updated Successfully!");
                 $(document).ready(function() {
@@ -94,11 +94,11 @@ function Controller($location,$localStorage,QuestionBankService,$routeParams, Au
             && manageQB.questions[manageQB.questions.length-1].level !== ''){
             var newItemNo = manageQB.questions.length+1;
 
-            console.log("type of this is :"+ typeof manageQB.questions[manageQB.questions.length-1].level );
+            
             
             manageQB.questions.push({qno:'', question:'', options:[], answer:'', level:''});
             
-            console.log(manageQB.questions.length);
+            
         }
         //alert('Please choose the correct answer for this question');      
     };      

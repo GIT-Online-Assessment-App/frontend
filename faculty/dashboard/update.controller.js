@@ -23,11 +23,11 @@ function Controller($location,$localStorage,DashboardService,$routeParams, Authe
                         upd.time_limit = result.time_limit;
                         upd.questions = result.questions;
                         upd.success1 = true;
-                        console.log(upd.responses);
+                       
                         
                     }
                     upd.editStatus = result.editable.status;
-                    console.log('editable: '+ upd.editStatus)
+                    
                     if(!upd.editStatus){
                         upd.errMsgs = result.editable.error;
                         $(document).ready(function() {
@@ -53,7 +53,7 @@ function Controller($location,$localStorage,DashboardService,$routeParams, Authe
         for(let i = 1; i<=len; i++){
             upd.questions[i-1].qno = i.toString();
         }
-        console.log(upd.questions);
+       
         upd.data = {
             "item_password":upd.itempass, 
             "questions" : upd.questions,                   
@@ -63,7 +63,7 @@ function Controller($location,$localStorage,DashboardService,$routeParams, Authe
         }
         DashboardService.updateQuestionPaper(upd.data, function(result){            
             if(result.status =='success'){
-                console.log('done');
+               
                 alert("Question Paper Updated Successfully!");
                 $(document).ready(function() {
                     
@@ -75,7 +75,7 @@ function Controller($location,$localStorage,DashboardService,$routeParams, Authe
                         alert("Exam key not unique!");
                     }else{  
                         alert("Failed to Update question paper!");
-                        console.log(result);
+                      
                     }
             }
             
@@ -90,7 +90,7 @@ function Controller($location,$localStorage,DashboardService,$routeParams, Authe
             
             upd.questions.push({qno:'', question:'', options:[], answer:''});
             
-            console.log(upd.questions.length);
+            
         }
         //alert('Please choose the correct answer for this question');      
     };      

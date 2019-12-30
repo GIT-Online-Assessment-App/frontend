@@ -17,7 +17,7 @@ function Controller($location, $rootScope, RegistrationService){
         confirm("Registration Successfull!");
         rg.loading = false;
         
-        //console.log(result.message.status);
+        
         window.location.href = "#!/";
         
       }else if(result.error){

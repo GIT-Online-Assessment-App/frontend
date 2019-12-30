@@ -100,7 +100,7 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
         for(let i = 1; i<=len; i++){
             hm.questions[i-1].qno = i.toString();
         }
-        console.log(hm.questions);
+        
         hm.data = {
             "item_name" : hm.itemname,
             "item_password":hm.securitykey, 
@@ -114,7 +114,7 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
             "email_id" : hm.email,
             "gate" : '__close__'               
         };
-        console.log(hm.data);    
+          
         QuestionPaperService.submitQuestions(hm.data, function(result){        
             if(result.status =='success'){
                 alert("Question Paper Uploaded Successfully!");
@@ -128,7 +128,7 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
                 alert("Exam key not unique!");
             }else{
                 alert("Failed to upload question paper!");
-                console.log(result);
+                
             }
             
             
@@ -168,7 +168,7 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
         hm.tname = name;
     }
     function sync(level, bool){
-        console.log("test1 : "+ typeof level)
+        
         if(bool){
             // add item
             hm.requiredLevels.push(level);
@@ -190,15 +190,13 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
                 "no_of_questions": hm.nRequiredQuestions
             }
             
-            console.log("Array item type: "+ typeof hm.requiredLevels[0]);
-            console.log("sending: " + JSON.stringify(hm.requestData));
+            
             QuestionBankService.getGeneratedQuestions(hm.requestData, function(result){
                 
                 hm.generated_questions = result.generated_questions;
                 hm.nQuestionsGenerated = hm.generated_questions.length;
                 hm.notes = result.note;
-                console.log(result.generated_questions);
-                console.log(result.note)
+            
             })
         }else{
             alert("please select levels");
@@ -210,7 +208,7 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
         for(let i = 1; i<=len; i++){
             hm.generated_questions[i-1].qno = i.toString();
         }
-        console.log(hm.generated_questions);
+        
         hm.data = {
             "item_name" : "QUIZ",
             "item_password":hm.qb_securitykey, 
@@ -224,7 +222,7 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
             "email_id" : hm.email,
             "gate" : '__close__'               
         };
-        console.log(hm.data);    
+        
         QuestionPaperService.submitQuestions(hm.data, function(result){        
             if(result.status =='success'){
                 alert("Question Paper Uploaded Successfully!");
@@ -235,7 +233,7 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
                 alert("Exam key not unique!");
             }else{
                 alert("Failed to upload question paper!");
-                console.log(result);
+        
             }
             
             

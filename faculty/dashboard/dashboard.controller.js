@@ -19,7 +19,7 @@ function Controller($location,$localStorage,DashboardService,$interpolate, Authe
         dsh.uname = $localStorage.currentUser.username;
         dsh.type = $localStorage.currentUser.type;
         DashboardService.getList($localStorage.currentUser.email, function(result){
-            console.log(result);//remove later
+            
             if(result.status=='success'){                
                 if(result.items.length > 0){
                     dsh.items = result.items;
@@ -66,7 +66,7 @@ function Controller($location,$localStorage,DashboardService,$interpolate, Authe
         if(item_pass != '' && $localStorage.currentUser.item_array.includes(item_pass)){
             dsh.keyw = item_pass
             dsh.url  = $interpolate('/update/{{keyw}}')(dsh);
-            console.log(dsh.url);
+            
             $location.path(dsh.url);
         }else{
             alert(item_pass+' Not found!!');

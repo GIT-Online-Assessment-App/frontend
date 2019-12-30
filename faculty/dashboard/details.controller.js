@@ -47,7 +47,7 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
                         dtl.responses = result;                   
                         dtl.success1 = true;
                         dtl.downloadCSVData = result;
-                        console.log(dtl.downloadCSVData)
+                        
                         
                         
                     }

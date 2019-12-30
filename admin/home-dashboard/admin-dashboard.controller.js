@@ -45,7 +45,7 @@ function Controller($localStorage,$location, DashboardService,AdminService, $int
                 admDshHm.msg = "Saved Successfully";
                 $localStorage.currentUser.qb_names.push(admDshHm.name);
                 admDshHm.name = "";
-                console.log($localStorage.currentUser.qb_names);
+                
                 admDshHm.QBankList = result.new_list;
 
 
@@ -60,7 +60,7 @@ function Controller($localStorage,$location, DashboardService,AdminService, $int
 
     function goToManageQBankPage(qb_name){
         //handle details url interpolation
-        console.log($localStorage.currentUser.qb_names);
+        
         if(qb_name != '' && $localStorage.currentUser.qb_names.includes(qb_name)){
             admDshHm.qb_name = qb_name
             admDshHm.url  = $interpolate('/manage-qb/{{qb_name}}')(admDshHm);
