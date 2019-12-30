@@ -228,6 +228,7 @@ function Controller($localStorage,QuestionPaperService,QuestionBankService,Admin
         QuestionPaperService.submitQuestions(hm.data, function(result){        
             if(result.status =='success'){
                 alert("Question Paper Uploaded Successfully!");
+                $('#myModal').modal('hide');
                 hm.goToDashboard();
             }else
             if(result.error=='exam_key not unique'){
