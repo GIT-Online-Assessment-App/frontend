@@ -27,8 +27,9 @@
 					<div class="wrap-input100 validate-input" ng-class="{ 'has-error': form.$submitted && form.email.$invalid }" data-validate = "Valid email is required: ex@abc.xyz">
 
 							<input type="email" name="email" class="input100" placeholder="Email"  autocomplete="username" ng-model="lg.email" required />
-							<span ng-messages="form.$submitted && form.email.$error"  class="focus-input100-1">
-							<span ng-message="required" class="focus-input100-2 text-danger"style="font-size : x-small;padding-left: 40%;"><b>Email is required!</b></span>
+							<span ng-messages="form.$submitted && form.email.$error"  class="focus-input100-2 text-danger">
+							<span ng-message="required" style="font-size : x-small;padding-left: 40%;"><b>Email is required!</b></span>
+							<span style="font-size : x-small;padding-left: 40%;" ng-show = "form.$submitted && form.email.$error.email"><b>Invalid email address.</b></span>
 							</span>
 
 
