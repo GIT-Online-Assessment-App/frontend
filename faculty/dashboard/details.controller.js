@@ -130,7 +130,7 @@ function Controller($localStorage,DashboardService,$routeParams, AuthenticationS
         itemsNotFormatted.forEach((item) => {
             itemsFormatted.push({
                 username: item.username, // remove commas to avoid errors,
-                usn: item.usn.bold,
+                usn: item.usn,
                 score: item.score,
                 email_id: item.email_id
             });
