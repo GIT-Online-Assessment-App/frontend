@@ -40,7 +40,7 @@ function Controller($localStorage,$location, DashboardService,AdminService, $int
         AdminService.new_qb(admDshHm.name, admDshHm.description, function(result){
             if(result.status=='success'){
                 admDshHm.status = "success";
-                
+                $('#myModal').modal('hide');
                 admDshHm.description="";
                 admDshHm.msg = "Saved Successfully";
                 $localStorage.currentUser.qb_names.push(admDshHm.name);
