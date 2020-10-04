@@ -63,7 +63,7 @@ function run($rootScope, $http, $location, $localStorage) {
         $rootScope.URLs = {
         //"ip" : "http://192.168.43.206"
         //"ip"  : "http://10.10.2.219"
-        "ip" : "http://10.10.5.47"
+        "ip" : "http://18.224.170.121"
         }
 
 
